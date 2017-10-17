@@ -6,6 +6,13 @@ image: Visual Studio 2015
 environment:
   matrix:
   ##############  test ######################
+  - BUILD_TARGERT: windows_msvc
+    GENERATORS: "Visual Studio 14 2015 Win64"
+    TOOLCHAIN_VERSION: 14
+    QT_VERSION: NO
+    RABBIT_ARCH: x64
+    RABBIT_BUILD_THIRDLIBRARY: zlib 
+    RABBIT_USE_REPOSITORIES: "FALSE"
   ##############  test ######################
 
   - BUILD_TARGERT: windows_msvc
@@ -677,7 +684,7 @@ after_build:
   - cd %APPVEYOR_BUILD_FOLDER%
 
 artifacts:
-  - path: $(BUILD_TARGERT)
+  - path: $(BUILD_TARGERT)_$(RABBIT_ARCH)
     name: RABBIT_$(BUILD_TARGERT)$(TOOLCHAIN_VERSION)_$(RABBIT_ARCH)_$(QT_VERSION)_v$(appveyor_build_version)
     type: zip
 
